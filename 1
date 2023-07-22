@@ -1,0 +1,46 @@
+```python
+import requests
+
+def get_lowest_gas_price():
+url = "https://api.etherscan.io/api"
+params = {
+"module": "gastracker",
+"action": "gasoracle",
+"apikey": "Your_API_Key"
+}
+
+response = requests.get(url, params=params)
+data = response.json()
+
+if data["status"] == "1":
+gas_price
+= int(data["result"]["SafeGasPrice"])
+return gas_price
+else:
+return None
+
+def get_lowest_gas_price_last_hour():
+url = "https://api.etherscan.io/api"
+params = {
+"module": "gastracker",
+"action": "gasoracle",
+"apikey": "Your_API_Key"
+}
+
+response = requests.get(url, params=params)
+data = response.json()
+
+if data["status"]
+== "1":
+gas_prices = data["result"]["gasPrices"]
+lowest_gas_price = min(gas_prices.values())
+return lowest_gas_price
+else:
+return None
+
+lowest_gas_price = get_lowest_gas_price_last_hour()
+if lowest_gas_price:
+print("过去一小时最低的gas价格为:", lowest_gas_price)
+else:
+print("无法获取gas价格，请稍后再试。")
+```
